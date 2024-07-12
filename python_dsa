@@ -1,0 +1,1561 @@
+-----------------------------------------------------------------------------------------------------------------------------
+from datetime import datetime
+date_string = "2024-05-14 14:30:15"
+# d = date_string[:10]
+# dt = datetime.strptime(d,"%a")
+# print(dt)
+d = datetime.now()
+d1 = d.strftime('%X')
+print(d1)
+
+
+# %a: Abbreviated weekday name (e.g., Mon)
+# %A: Full weekday name (e.g., Monday)
+# %b: Abbreviated month name (e.g., Jan)
+# %B: Full month name (e.g., January)
+# %c: Locale’s appropriate date and time representation (e.g., Tue Aug 16 21:30:00 1988)
+# %x: Locale’s appropriate date representation (e.g., 08/16/88)
+# %X: Locale’s appropriate time representation (e.g., 21:30:00)
+
+
+from datetime import datetime
+date_string = "2024-05-14 14:30:15"
+
+d1 = datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S")
+print(d1)
+
+----------------------------------------------------------------------------------------
+
+								
+								
+----------------------------------------------------------------------------------------------------                              
+                              LCM AND HCF OR GCD
+               --------------------------------------------------
+                              Eculidian algorithm
+a=20
+b=30
+def gcd(a,b):
+    while(a!=0 and b!=0):
+        if(a>b):
+            a=a%b
+        elif(b>a):
+            b=b%a
+            
+    if(a!=0):
+        return a
+        
+    else:
+        return b
+g = gcd(a,b)
+print(g)
+    
+def lcm(a,b):
+    return a*b/gcd(a,b)
+
+lc = lcm(a,b)
+print(int(lc))
+
+                               Prime numbers of first 100 digits
+                       ------------------------------------------------------    
+                                sieve of eratosthenes algorithm
+n =100
+def primenumbers(n):
+    prime = [True]*(n+1)
+    if n==1:
+        return n
+        
+    p=2    
+    while p*p<=n:
+        if prime:
+            for i in range(p*p,n+1,p):
+                prime[i]=False
+        
+        p+=1
+    li=[]
+    for v in range(2,n+1):
+        if prime[v]:
+            li.append(v)
+            
+    return li        
+               
+p = primenumbers(n)
+print(p)
+
+-------------------------------------------------------------------------------------------------------------------------------------
+															Find weather number is prime or not
+def primenumber(n):
+    if n==1:
+        return True
+    elif n==2 or n==3:
+        return True
+    elif (n%2==0 or n%3==0):
+        return False
+    i=5    
+    for i in range(5,i*i<=n):
+        if(n%i==0 or n%i+2==0):
+            return False
+            i+=6
+    return True
+n =9   
+p = primenumber(n)
+print(p)
+
+
+                                                             divisors of n
+                                                  ----------------------------------------------
+def divisors(n):
+    i =1
+    while i*i<=n:
+        if(n%i==0):
+            print(i)
+        i=i+1
+    for i in range (i-1,0,-1):
+        if(n%i==0):
+            print(int(n/i))
+    
+n =40
+div = divisors(n)
+print(div)                                               
+
+                                            how to switch on the ith bit
+                                    --------------------------------------------------------------------
+n =36
+i=3
+mask = 1<<i    #take binary sequence of 1 0000001 left shift with ith position after that do or operation between n and mask
+print((n|mask))                                    
+                                            how to switch off the ith bit
+                                    --------------------------------------------------------------------                        
+n =36
+i=5
+mask = ~(1<<i) #take binary sequence of 1 0000001 left shift with ith position after that do complement(~) it will change zeros to ones ones to zeros next do and operation between n and mask
+print((n&mask))
+    
+
+                                                    how to know if bit is on or off
+                                        ----------------------------------------------------------
+n=36
+mask = 1<<i      #move 1 to ith position and do and opeartion
+print(n&mask)                                        
+
+                                                       Toggle
+                                            ------------------------------------------------------------------------------------
+n=36
+i=5
+mask=1<<i  # if you want to change 0 to 1 and 1 to 0 use toggle just left shift 1 to ith position and perform xor opearation
+print(n^mask)
+
+                                            
+                                                finding right most set bit
+                                          ---------------------------------------------------     
+                                               
+import math
+n= 40
+masked =n&n-1  # do and opeartion between n and n-1 to find masked bit
+rmsb=n^masked  # do or opeartion between n and masked bit
+
+print(int(math.log(n^(n&n-1))/math.log(2))+1)  apply log formula to find position of rmsb
+
+                             median of Two sorted Arrays
+                 -------------------------------------------------------------------------------
+				 
+		merged = sorted(nums1 + nums2)
+        n = len(merged)
+        if n % 2 == 0:
+            return (merged[n // 2 - 1] + merged[n // 2]) / 2
+        else:
+            return merged[n // 2]				 
+				 
+
+ if len(nums1) > len(nums2):
+            nums1, nums2 = nums2, nums1
+
+    l = 0
+    h = len(nums1)
+
+    while l <= h:
+        m1 = (l + h) // 2 #take some numbers from list1 exnaple list have 5 elements if you have 10 elements by merging two-
+                           # Arrays take 2 from1
+        m2 = (len(nums1) + len(nums2) + 1) // 2 - m1 #take 3 from array 2
+
+        l1 = float('-inf') if m1 == 0 else nums1[m1 - 1] 
+        r1 = float('inf') if m1 == len(nums1) else nums1[m1]
+        l2 = float('-inf') if m2 == 0 else nums2[m2 - 1]
+        r2 = float('inf') if m2 == len(nums2) else nums2[m2]
+
+        if l1 <= r2 and l2 <= r1:
+            if (len(nums1) + len(nums2)) % 2 == 0:
+                return float(max(l1, l2) + min(r1, r2)) / 2
+            else:
+                return float(max(l1, l2))
+        elif l1 > r2:
+            l = m1 - 1
+        else:
+            h = m1 + 1   
+            
+l1 = [2,4,5,6]
+l2 = [1,3,6,7,8,9]
+l = len(l1)+len(l2)
+l3 =[]*l
+# l3 = len(l1)+len(l2)
+# l4 = [0]*l3
+i = 0
+j = 0
+
+while i<len(l1) and j<len(l2):
+    if l1[i]<l2[j]:
+        l3.append(l1[i])
+        i+=1    
+    elif l1[i]>l2[j]:
+        l3.append(l2[j])
+        j+=1
+    else:
+        i+=1
+        j+=1
+if i == len(l1):
+        l3.extend((l2[j-1:]))
+if j ==len(l2):
+        l3.extend(l1[i-1:])
+print(i)
+print(j)
+   else:
+        l3.append(l1[i])
+        i+=1
+        j+=1
+
+l3.extend((l2[j:]))
+l3.extend(l1[i:])
+print(l3)   
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_half = merge_sort(arr[:mid])
+    right_half = merge_sort(arr[mid:])
+
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    sorted_array = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted_array.append(left[i])
+            i += 1
+        else:
+            sorted_array.append(right[j])
+            j += 1
+
+    sorted_array.extend(left[i:])
+    sorted_array.extend(right[j:])
+    return sorted_array
+
+arr = [3, 1, 4, 1, 5, 9, 2, 6, 5]
+print(merge_sort(arr))       
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                            max contigues subarray
+    if len(nums)==1:
+            return nums[0]
+        maxsum =float('-inf')
+        sum = 0
+        for i in range(0,len(nums)):
+            if sum>0:
+                sum = sum+nums[i]
+            else:
+                sum = nums[i]
+            maxsum = max(maxsum,sum)
+
+        return maxsum            
+                    
+                                Count setbits in a number
+                         ----------------------------------------------------
+
+                                                                decimaltobinary:
+                                                                n =39
+                                                                r=''
+                                                                while n>=1:
+                                                                    r=str(n%2)+r
+                                                                    n=n//2
+                                                                print(r)
+                            Brian Kernighan's Algorithm.
+                              
+
+    n =42
+    count=0
+    while n >0:
+        n=n&(n-1) #as per the algorithm if you do and operation wit n-1 you are off the value from 1 to 0 till n==0 increse count value how manty times its off that data
+        count+=1
+    print(count)
+    
+    
+                                Find weather number is power of 2
+                        -------------------------------------------------------------------------
+                        
+def boolean(n):
+    if n==0:
+        return False
+    else:
+        return n&(n-1)==0
+
+b = boolean(0)
+print(b)
+
+                                        Lonley_Integer
+------------------------------------------------------------------------------------------------------
+
+
+single_integer = [4,4,6,5,6,5,7]
+result = 0
+for single in single_integer:
+    result = result^single
+print(result) 
+
+                                Length of consecutive one's (continues ones) (note:count set bits and this are some what same only thing will do mask as n-1 in set bits count)
+                    --------------------------------------------------------------------------
+                    
+                    
+n=101
+count=0
+mask = n<<1   
+while n>0:
+   n= n&mask
+   count+=1
+print(count)                           
+
+                                       change position of odd bits into even bits   
+                                -----------------------------------------------------------------------------------------------        
+
+n = 181
+print(((n & 0xAAAAAAAA) >> 1) | ((n & 0x55555555) << 1))  
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+                                                    RECURSION Based Problems
+
+def fibonacci(n):
+    if(n==1 or n==2):
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+res = fibonacci(5)
+print(res)
+
+def fact(n):
+    if(n==0 or n==1):
+        return 1
+    else:    
+        return n*fact(n-1)
+    
+res1 = fact(3)  
+print(res1)
+
+
+def natural(n):
+    if(n==0 ):
+        return 
+    else:
+        print(n)
+        return natural(n-1)
+    
+res = natural(5) 
+def natural(n):
+    if(n==1):
+        print(1) 
+    else:
+        
+        natural(n-1)
+        print(n)
+res = natural(7)
+
+count of digits
+def numberofdigits(n):
+    
+    if(n==0):
+         return 0
+    else:
+      return numberofdigits(n//10)+1
+        
+n=12453        
+res = numberofdigits(n)
+print(res)
+
+sum of digits
+def sdigits(n):
+    if n==0:
+        return 0
+    else:
+        return sdigits(n//10)+n%10
+n=1665445  
+res = sdigits(n)
+print(res)
+
+sum of digits in array
+def sdigits(n,i):
+    if i==len(n):
+        return 0
+    else:
+        return sdigits(n ,i+1)+n[i]
+n=[1,3,4]  
+i=0
+res = sdigits(n,i)
+print(res)
+
+reverse string
+def rstring(s,r,i):
+    if i==0:
+        return r+s[i]
+    else:
+        return rstring(s,r+s[i],i-1)
+string="mahendra"        
+s = list(string)
+r=""
+i=len(s)-1
+res = rstring(s,r,i)
+print(res)
+
+def palindrome(s,i,j):
+    if s[i]!=s[j]:
+        return False
+    elif j<=i:
+        return True
+    else:
+        return palindrome(s,i+1,j-1)
+s="madam"        
+i=0
+j=len(s)-1
+res = palindrome(s,i,j)
+print(res)
+s="madam" 
+i =0
+j = len(s)-1
+boolean = True
+while i<=j:
+    if s[i]==s[j]:
+        i+=1
+        j-=1
+    else:
+        boolean = False
+        break
+if boolean == True:
+    print(True)
+else:
+    print(False)
+    
+def reverse_number(n):
+    reversed_num = 0
+    sign = 1 if n >= 0 else -1
+    n = abs(n)
+    
+    while n != 0:
+        digit = n % 10
+        reversed_num = reversed_num * 10 + digit
+        n //= 10
+    
+    return sign * reversed_num
+
+# Example usage
+number = 12345
+print(f"The reverse of {number} is {reverse_number(number)}")
+
+number = -98765
+print(f"The reverse of {number} is {reverse_number(number)}")
+    
+
+----------------------------------------------------------------------------------------------------------------------------
+                                                                      winner of the circular(joseph problem)
+                                                                      
+#one based index                                                                      
+def findTheWinner(n, k):
+    if n == 1:
+        return 1 
+    else:
+        return (findTheWinner(n - 1, k) + k-1) % n+1 
+
+n = 5
+k = 2
+res = findTheWinner(n, k)
+print("The winner's index is:", res)   
+formula = (jos(n-1,k)+k) % n
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+                                        subsequence of a given string
+                                        
+def gss(s, ans):
+   
+    if len(s) == 0:
+        print(ans)
+        return
+    # Include the current character in the subset /pick condition
+    gss(s[1:], ans + s[0])
+    # Exclude the current character from the subset /not pick condition
+    gss(s[1:], ans)
+
+# Example usage:
+s = 'abc'
+ans = ''
+gss(s, ans)
+
+def gss(s,ans,li):
+    if len(s)==0:
+        li.append(ans)
+        return
+    gss(s[1:],ans+s[0],li)
+    gss(s[1:],ans,li)		
+     
+    
+s='abc'
+ans=''
+subsets=[]
+res=gss(s,ans,subsets)
+print(subsets)
+
+
+def subset(nums,ans,li):
+            if len(nums)==0:
+                li.append(ans)
+                return
+            subset(nums[1:],ans+[nums[0]],li)
+            subset(nums[1:],ans,li)
+    
+        li = []
+        ans = []
+        nums.sort()
+        subset(nums,ans,li)
+        unique_list = [list(t) for t in {tuple(sublist) for sublist in li}]
+        return unique_list
+
+li = [[1,2,2],[1,2],[1,2],[1],[2,2],[2],[2],[]]
+un1= [{tuple(sublist) for sublist in li}]
+un= [list(t) for t in {tuple(sublist) for sublist in li}]
+print(un1)										
+                                        is sequence
+			-----------------------------------------------------------------------------------------------------------------------------------
+s ="axc"
+t ="ahbgdc"
+t =axcdb
+bgaxc			
+
+
+	  sp = 0
+      tp = 0
+      while sp<len(s) and tp< len(t):
+            if  s[sp] == t[tp]:
+                sp+=1
+            tp+=1
+      if sp == len(s):
+        return True
+      else:
+        return False
+
+ --------------------------------------------------------------------------------------------------------------------------------
+                                        Balanced parentheses
+                                        
+def balpar(ar, n, i, o, c):
+
+    if i == len(ar):
+        print(ar)
+    if o < n:
+        ar[i] = '('
+        balpar(ar, n, i + 1, o + 1, c)
+    if c < o:
+        ar[i] = ')'
+        balpar(ar, n, i + 1, o, c + 1)
+
+# Example usage:
+n = 2
+ar = [''] * n * 2
+i = 0
+o = 0
+c = 0
+res = balpar(ar, n, i, o, c)
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+                                                        Letter Combination
+def lettercom(s,ans,keyboard):
+    if len(s)==0:
+        print(ans)
+        return
+    key_index = int(s[0])
+    
+    key = keyboard[key_index]
+    for letter in key:
+        lettercom(s[1:],ans+letter,keyboard)
+    
+    
+s='846'
+ans=''
+keyboard = ['','','abc','def','ghi','jkl','mno','pqrs','tuv','wxyz']
+res = lettercom(s,ans,keyboard) 
+
+--------------------------------------------------------------------------------------------
+                                                         Print All permutations
+                                                         
+def permutations(ar,fi,i):
+    if fi==len(ar)-1:
+       print(ar)
+       return
+    for i in range(fi,len(ar)):
+        ar[fi],ar[i] = ar[i],ar[fi]
+        permutations(ar,fi+1,i)
+        ar[fi],ar[i] = ar[i],ar[fi]
+
+
+s="ABC"
+ar = list(s)
+fi = 0
+i=0
+res=permutations(ar,fi,i)    
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def perm(nums,fi,result):
+            if fi == len(nums)-1:
+                result.append(nums[:])
+                return
+            for i in range(fi,len(nums)):
+                nums[fi],nums[i] = nums[i],nums[fi]
+                perm(nums,fi+1,result)
+                nums[fi],nums[i] = nums[i],nums[fi]   
+      
+        fi =0
+        result = []
+        perm(nums,fi,result)
+        return result                                                     
+-----------------------------------------------------------------
+									Letter Combination
+									
+def lettercomb(digits,key,combination,li):
+            if len(digits) == 0:
+                li.append(combination)  # Append the combination when there are no more digits
+                return
+            for i in range(len(key[int(digits[0])])):
+                letter = key[int(digits[0])][i]
+                lettercomb(digits[1:], key, combination + letter,li)       
+        if not digits:
+            return [] 
+        key = ['','','abc','def','ghi','jkl','mno','pqrs','tuv','wxyz']
+        li = []
+        ar = lettercomb(digits,key,'',li)
+        return li
+ #for letter in key[int(digits[0])]:
+                #lettercomb(digits[1:], key, combination + letter, result)
+-------------------------------------------------------------------------------------------------
+                                            SubsetSum
+                                            
+def subsetsum(ar,summ,i):
+    
+    if summ==0:
+        return 1
+    if summ<0:
+        return 0
+    if i==len(ar):
+        return 0
+    return subsetsum(ar,summ-ar[i],i+1) + subsetsum(ar,summ,i+1)
+    
+res = subsetsum([10,10,15,5],25,0)
+print(res)
+
+------------------------------------------------------------------------------------------------------------------
+                                                    Lucky Number
+                                                    
+def lnumber(n,counter):
+    if n<counter:
+        return True
+    if n%counter==0:
+        return False
+    return lnumber(n-(n//counter),counter+1)  
+
+res=lnumber(13,2) 
+print(res)                                                    
+
+                                         ------------------------------------------------------------------------------------------------------
+                                                                    Binary Search
+def binary_search(arr, target, low, high):
+    if high < low:
+        return False  # Target not found
+    mid = (low + high) // 2
+    if arr[mid] == target:
+        return mid  # Target found
+    elif arr[mid] < target:
+        return binary_search(arr, target, mid + 1, high)
+    else:
+        return binary_search(arr, target, low, mid - 1)
+Kadane's Algorithm
+
+
+
+                                        missing number
+-----------------------------------------------------------------------
+li = [1, 2, 4]
+
+max_num = max(li)
+total_sum = max_num * (max_num + 1) // 2
+li_sum = sum(li)
+res = total_sum-li_sum
+print(total_sum)
+
+
+                                        LAMBDA
+                                        
+def mx(x,y):
+    if x>y:
+        return x
+    else:
+        return y    
+print(mx(2,3))   
+
+mx = lambda x,y:x if x>y else y
+print(mx(4,5)) 
+
+class student():
+    school = "devaki"
+    
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+    def avrg(self):
+        return f"{self.name},{self.age}"
+    @classmethod    
+    def me1(cls):
+        return cls.school
+    @staticmethod       
+    def me():
+        print('hello')
+s1 = student('mahendra',25)   
+s1.me()
+
+------------------------------------------------------------------------------
+                                                            remove duplicates from sorted array                                       
+  def removeDuplicates(self, nums: List[int]) -> int:
+
+        rd =0
+        for i in range(1,len(nums)):      take variable rd = 0
+                                           start loop from 1 to len compare if nums[rd]!=nums[i] increment rd in swap like nums[rd] = nums[i]
+                                           return len(nums)with slicing
+            if nums[rd]!=nums[i]:
+                rd+=1
+                nums[rd] = nums[i]
+
+        return len(nums[:rd+1])         
+
+
+------------------------------------------------------------------
+                               find subarrays of an array
+ar = [1,2,3,4,5]                                          1,      2,
+                                                          12      23,
+                                                          123
+                                                          1234
+                                                          12345
+for i in range(0,len(ar)):                                take two for loops i and j
+                                                          you need arrays from i to j
+                                                          take another value k to print arrays 
+                                                          loop from i to j print ar[k]
+ for j in range(i+1,len(ar)+1):                                        
+    for k in range(i,j):
+        print(ar[k],end='')
+         
+    print()
+    
+    
+ ---------------------------------------------------------------------
+ s = 'abcabcbb'                                       Longest substring with out repeating characters
+        l =0
+        maxsub = 0
+        d =set()
+        for i in range(len(s)):
+            while s[i]  in d:
+                d.remove(s[l])
+                l+=1
+            w = (i-l)+1
+            maxsub = max(maxsub,w)
+            d.add(s[i])
+
+        return maxsu
+        
+        
+ma = 0
+for i in range(len(s)):
+    seen = set()
+    for j in range(i,len(s)):
+        if s[j] in seen:
+            break
+        else:
+            seen.add(s[j])
+
+    ma = max(ma,len(seen))
+return ma        
+        -------------------------------------------------------------------------------------------------------------
+																longest palindrome substring
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+
+        maxlength = 0
+        longsubstring = ''
+
+        def ispalindrome(s1):
+            return s1 == s1[::-1]
+                   
+        for i in range(len(s)):
+            for j in range(i,len(s)):
+                substring = s[i:j+1]
+                if s1 == s1[::-1] and len(substring)>maxlength:
+                    maxlength = len(substring)
+                    longsubstring = substring
+        return longsubstring            
+-------------------------------------------------------------------------------------------------------------------------------------------------------------																
+                       remove element
+def removeElement(self, nums: List[int], val: int) -> int:           as long as element in list remove 
+                                                                     elements
+        while val in nums:
+            nums.remove(val)
+        return len(nums)                          
+        
+        
+        
+=============================================================================================
+                                                search range/ find first and last position of an element 8 first occurence and last occurence
+                                                
+ def searchRange(self, nums: List[int], target: int) -> List[int]:
+
+            l =0                                                                start wit middle element do left serach for first element
+                                                                                for this if target matches middle do h = mid-1 do binary search till first
+                                                                                element found append li[o] = 1
+                                                                                
+            h = len(nums)-1
+            res = [-1,-1]
+            while l<=h:
+                mid = (l+h)//2
+                if (target==nums[mid]):
+                    h = mid-1
+                    res[0] = mid
+                elif (target < nums[mid]):
+                    h = mid - 1
+                else:
+                    l = mid + 1
+            
+            l =0 
+            h = len(nums)-1
+            while l<=h:
+                mid = (l+h)//2
+                if (target==nums[mid]):
+                    l = mid+1
+                    res[1] = mid
+                elif (target < nums[mid]):
+                    h = mid - 1
+                else:
+                    l = mid + 1
+            return res
+            nums = [3,4,4,4,4,4,6], target = 4
+            nums = [5,7,7,8,8,10], target = 8
+            ----------------------------------------------------------------------------------------------------------------------------------------
+                                                                serach in element in rotated sorted array                                                
+ class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+      
+    l = 0
+    h = len(nums) - 1
+
+    while l <= h:
+        mid = (l + h) // 2 
+        if target == nums[mid]:
+            return mid
+        elif nums[l] <= nums[mid]:                                     checking if target is in left side or right side by comparing with l and mid 
+                                                                       if l is greater than or equal to target and lessthan mid it means its in left side
+                                                                       to check if it is right check if target is 
+            if target >= nums[l] and target < nums[mid]:
+                h = mid - 1
+            else:
+                l = mid + 1
+        else:
+            if target > nums[mid] and target <= nums[h]:
+                l = mid + 1
+            else:
+                h = mid - 1
+
+    return -1
+
+nums = [5, 1, 3]
+target = 3
+print(search(nums, target))
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+                                                                        Move zeros to end of an Arrays
+def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+
+        """
+        nz = 0
+        z = 0                                                              take two variable like nonxeros nz=0 and z=0 as long as nz is lessthan len(nums)
+                                                                           compare if nz!=0 swap with nums(z) and increment nz+ and z+ else increment z value
+        while nz<len(nums):
+            if nums[nz]!=0:
+                temp = nums[z]
+                nums[z] = nums[nz]
+                nums[nz] = temp
+                nz+=1
+                z+=1
+            else:
+                nz+=1
+        return nums                                                                                            
+       -----------------------------------------------------------------------
+                                                            max element 1 and 2 in array   
+
+                                                            
+ar = [2, 3, 99, 5, 60, 74, 89]
+mx1 = ar[0]
+mx2 = ar[0]
+
+if ar[1] > mx1:
+    mx1 = ar[1]
+    mx2 = ar[0]
+else:
+    mx1 = ar[0]
+    mx2 = ar[1]
+    
+for i in range(2,len(ar)):
+    if ar[i]>mx1:
+        mx1 = ar[i]
+    elif ar[i]>mx2:
+        mx2=ar[i]
+print(mx1)
+print(mx2) 
+
+ ------------------------------------------------------------------------
+                                   Find floor and ceil value
+                                   
+ar = [19, 23, 56, 62, 88, 99]
+key= 55
+l = 0
+h = len(ar)
+while l<=h:
+    mid = (l+h)//2
+    if key == ar[mid]:
+     print(mid)
+    elif key < ar[mid]:
+     h = mid-1
+    else:
+        l = mid+1
+print(ar[h])                                      
+
+
+---------------------------------------------------------
+														Two Sum
+dic ={}
+for i ,n in enumerate(nums):
+	diff = target - n
+	if diff in dic:
+		return [dic[diff],i]
+	dic[n]=i 
+return []   														
+														
+----------------------------------------------------------------------------------------------------------
+															Container with most water
+															
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        l =0
+        r = len(height)-1
+        maxarea =0
+        while l<r:
+            area = (r-l)*min(height[l],height[r])
+            maxarea = max(maxarea,area)
+            if height[r] > height[l]:
+                l+=1
+            else:
+                r-=1    
+        return maxarea															
+													
+
+																3 sum
+						------------------------------------------------------------------------------------------
+						
+nums.sort()
+target = 0
+s =set()
+for i in range(len(nums)):
+	j =i+1
+	k =len(nums)-1
+	while j<k:
+		csum = nums[i]+nums[j]+nums[k]
+		if csum>target:
+			k-=1
+		elif csum<target:
+			j+=1    
+		else:
+			s.add((nums[i],nums[j],nums[k]))
+			j+=1
+			k-=1
+return list(s) 			
+
+
+
+------------------------------------------------------------------------------------------
+													Product of array except itself
+l = []
+for i in range (len(nums)):
+	product = 1
+	for j in range(len(nums)):
+		if i!=j:
+			product = product* nums[j]
+		l.append(product)
+return l									
+
+
+-------------------------------------------------------------------------------------------
+														 is palindrom
+def isPalindrome(self, s: str) -> bool:
+
+        if len(s)==0:
+            return 'true'
+
+        s1 = ''.join(j for j in s if j.isalnum())
+        s2 = s1[::-1]
+        print(s1)
+        print(s2)
+        return s1.lower()==s2.lower()
+
+
+--------------------------------------------------------
+													valid anagram
+													
+ return sorted(s)==sorted(t)	
+return Counter(s) ==counter(t)
+
+---------------------------------------------------------------------------------------------
+														group of anagrams
+ def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        d={}
+        for n in strs:
+            s2=''.join(sorted(n))
+            if s2 in d:
+                d[s2].append(n)
+            else:
+                d[s2] = [n]
+                print(d)
+        return list(d.values())
+
+-------------------------------------------------------------------------------------------------------
+														best time to sell or buy a stock
+														
+														
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        minprofit = prices[0]
+        maxprofit=0
+        for price in prices:
+            if price<minprofit:
+                minprofit = price
+            else:
+                maxprofit = max(maxprofit,price-minprofit)   
+        return maxprofit  
+													
+														 
+						
+						
+----------------------------------------------------------------------------------------------------------------------------
+															majority element or most_common
+    def majorityElement(self, nums: List[int]) -> int:
+        s = Counter(nums)
+        return s.most_common(1)[0][0]
+		
+from collections import defaultdict
+m = defaultdict(int)
+nums = [2,2,1,1,1,2,]
+
+for n in nums:
+    m[n]+=1
+n = len(nums)//2    
+for k, v in m.items():
+    if v>=n:
+        print(k)		
+		
+
+
+i =0 
+j = 0
+li =[]
+while i<len(nums1) and j<len(nums2):
+	if nums1[i]<nums1[i+1]:
+		if nums1[i]<nums2[j]:
+			li.append(nums1[i])
+			i+=1
+		elif nums1[i]>nums2[j]:
+			li.append(nums2[j])
+			j+=1
+	else:
+		li.extend(nums2[j])  
+
+return li		
+
+---------------------------------------------------------------------
+											min_window
+
+
+min_len = float('inf')
+	min_window = ""
+	
+for i in range(len(s)):
+	for j in range(i+1, len(s)+1):
+		window = s[i:j]
+		if all(window.count(char) >= t.count(char) for char in set(t)):
+			if len(window) < min_len:
+				min_len = len(window)
+				min_window = window
+
+return min_window
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+
+        minsum = nums[0]
+        maxsum = nums[0]
+        res = maxsum
+
+        for i in range(1,len(nums)):
+             if nums[i]<0:
+                 minsum,maxsum = maxsum,minsum
+            maxsum = max(nums[i],maxsum*nums[i]) 
+            minsum = min(nums[i],minsum*nums[i])             
+            res = max(res, maxsum)
+        return res    
+		
+		[-2,3,-4]
+		[2,3,-2,4]
+		
+		
+		
+		
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+
+        n = len(nums)
+        left_pr = [0]*n
+        right_pr = [0]*n
+        left_pr[0] =1
+        right_pr[-1]=1
+        ans = [0]*len(nums)
+        for i in range(1,n):
+            left_pr[i] = left_pr[i-1]*nums[i-1]
+        print(left_pr)
+        for j in range(n-2,-1,-1):
+            right_pr[j] = right_pr[j+1]*nums[j+1]
+        print(right_pr)  
+
+        for k in range(n):
+            ans[k] = right_pr[k]*left_pr[k] 
+        return ans
+
+
+                                                    valid sudoku
+                                                    
+board = [
+    ["5","3",".",".","7",".",".",".","."],
+    ["6",".",".","1","9","5",".",".","."],
+    [".","9","8",".",".",".",".","6","."],
+    ["8",".",".",".","6",".",".",".","3"],
+    ["4",".",".","8",".","3",".",".","1"],
+    ["7",".",".",".","2",".",".",".","6"],
+    [".","6",".",".",".",".","2","8","."],
+    [".",".",".","4","1","9",".",".","5"],
+    [".",".",".",".","8",".",".","7","9"]]
+
+def fun(board):
+    for i in range(9):
+        columns= set()
+        for j in range(9):
+                if board[i][j]!='.':
+                    if board[i][j] not in columns:
+                        columns.add(board[i][j])
+                    else:
+                        return False
+    for j in range(9):
+        rows= set()
+        for i in range(9):
+                if board[i][j]!='.':
+                    if board[i][j] not in rows:
+                        rows.add(board[i][j])
+                    else:
+                        return False                    
+    return True
+    
+print(fun(board))      
+
+                                              
+from collections import Counter
+st = 'NETQSEMTOSNET'
+s=Counter(st)
+
+print(s)
+for k,v in s.items():
+    if v==1:
+        print(k)
+        break
+dic = {}
+for i in st:
+    if i not in dic:
+        dic[i]=1
+    else:
+        dic[i]+=1
+print(dic)  
+
+for j in range(len(st)):
+    if dic[st[j]]==1:
+        print(f'{st[j]}:{j}')
+        break
+        
+    
+  		
+							generators
+-------------------------------------------------------------------------
+
+-------
+import random
+def cubes(s,e):
+    while True:
+        yield random.randint(s,e)
+        
+
+c = cubes(1,10)
+for j in range(10):
+    print(next(c))		
+-------	
+def fibonacci():
+    a,b = 0,1
+    while True:
+        yield a
+        a,b = b,a+b
+fib = fibonacci()   
+n= 6
+for i in range(n):
+    print(next(fib))	
+--------							
+def collatez(n):
+  while n!=1:
+    yield n
+    
+    if n%2==0:
+      n = n//2
+    else:
+      n = 3*n+1
+  
+  yield 1
+n =12
+for i in collatez(n):
+  print(i)		
+  
+  
+ ----- 
+  def prime_number(n):
+    if n==1 or n==2 or n==3:
+        yield True
+    if n%2==0 or n%3==0:
+        yield False
+        
+    i =5
+    for i in range(5,i*i<=n):
+        if (n%i==0) and (n%i+2==0):
+            yield False
+            i+=6
+    yield True        
+       
+   
+n = 101
+obj = prime_generator(n)
+print(next(obj))
+------
+def prime_generators(n):#from 1 to 10
+    if n == 1:
+        return
+    
+    prime = [True] * (n + 1)
+    i = 2
+    
+    while i * i <= n:
+        if prime[i]:
+            for k in range(i * i, n + 1, i):
+                prime[k] = False
+        i += 1
+
+    for p in range(2, n + 1):
+        if prime[p]:
+            yield p
+
+# Using the generator
+n = 10
+for prime in prime_generator(n):
+    print(prime)
+
+----------------------------------------------------------------------------------------
+									decarators
+									
+def log(func):
+    def wrapper(x,y):
+        print(f'genearting logs for {func.__name__} function')
+        return func(x,y)
+    return wrapper    
+        
+@log
+def multiply(x,y):
+    return x+y
+    
+res = multiply(10,20)
+print(res)
+                               second
+def log(func):
+    cache = {}
+    def wrapper(x,y):
+        r = (x,y)
+        if r in cache:
+            print('from cache')
+            return cache[r]
+        cache[r] = func(x,y)
+        return func(x,y)
+    
+    return wrapper    
+        
+@log
+def multiply(x,y):
+    return x+y
+    
+print(multiply(10,20))
+print(multiply(10,20))
+
+						third
+						
+def log(func):
+    def wrapper(x):
+        if x<0:
+            raise ValueError('invalid arguments')
+        return func(x)    
+    return wrapper    
+        
+@log
+def multiply(x):
+    return x*x
+    
+print(multiply(-1))
+							fourth
+							
+def log(func):
+   
+    def wrapper(x):
+        if not hasattr(wrapper,'tries'):
+            wrapper.tries = 0
+        retries = 2
+        if  wrapper.tries>retries:
+            raise ValueError('reached your limit try after some time')
+        wrapper.tries+=1    
+        return func(x)    
+    return wrapper    
+        
+@log
+def multiply(x):
+    return x*x
+    
+print(multiply(1))
+print(multiply(2))
+print(multiply(3))
+print(multiply(3))
+_____________________________________________________________________
+							OOPS concept
+							
+super_keyword							
+							
+
+class A:
+    def __init__(self,name):
+        self.name = name
+       
+        
+class B(A):
+    def __init__(self,name,lname):
+        super().__init__(name)
+        self.lname = lname
+        
+    def jaggu(self):
+        return self.name    
+        
+obj = B('mahendra','mahendrababu')    
+print(obj.jaggu()
+        
+        
+class C:
+    def mahendra(self):
+        print('hi mahendra')
+       
+       
+        
+class D(C):
+    def sudeep(self):
+        super().mahendra()
+        print('helo sudeep')
+    
+        
+ob = D()
+ob.sudeep()  
+
+class A:
+    def __init__(self):
+       print('hi mahendra')
+       super().__init__()
+        
+class B:
+    def __init__(self):
+        print('hi mahendra')
+        super().__init__()
+    
+        
+class C(A,B):
+    def __init__(self):
+        print('hi mahendra')
+        super().__init__()
+       
+C()     
+
+
+class A:
+    x= 10
+    def __init__(self):
+      print()
+          
+    def cl(cls):
+        print(cls.x)
+    def st():
+        print('static')
+ob = A()        
+A.st()
+A.cl()
+
+                        shallow copy & deep copy
+-----------------------------------------------------                        
+
+import copy
+li = [2,3,[4,6],5]
+l1 = copy.copy(li)
+l2 = copy.deepcopy(li)
+l1[2][0] = 9
+print(l2)
+print(li)
+
+import copy
+li = [2,3,[4,6],5]
+l1 = copy.copy(li)
+l2 = copy.deepcopy(li)
+
+l2[2][0] = 6
+print(l2)
+print(li)
+
+-----------------------------
+li = [1,2,3,-1,-2,-5]
+maxsum = -99999
+csum= 0
+
+for n in li:
+    l = []
+    if csum>0:
+        csum+=n
+        l.append(n)
+    else:
+        csum = n
+    maxsum = max(maxsum,csum)
+    
+print(maxsum)   
+print(l)
+
+dict1 = {'key1':[1,2,3]}
+dict2 = {'key1':[4,5,6],'key2':['a','b','c']}
+dic3 ={}
+for k,v in dict1.items():
+    for k1,v1 in dict2.items():
+        if k==k1:
+            dict1[k].extend(dict2[k])
+
+            
+print(dict1)  
+
+
+
+def search_filter(names, search_string):
+    # Convert search string to lowercase for case insensitive search
+    search_string = search_string.lower()
+    filtered_names = [name for name in names if search_string in name.lower()]
+    return filtered_names
+
+# Example usage
+names = ["Mahender", "Anand", "Mahesh", "Mahindra", "Vinay", "123Mah", "123ma"]
+search_string = "123"
+filtered_names = search_filter(names, search_string)
+print(filtered_names)
+
+
+
+-----------------------------------------------------------------------
+                            Multi_Threading
+                            
+from threading import Thread
+import time
+def do_something():
+    print('sleeping 1 second')
+#     time.sleep(1)
+    print('sleeping done')
+    
+t1 = Thread(target=do_something)
+t2 = Thread(target=do_something)
+t1.start()
+t1.join()
+t2.start()
+t2.join()
+
+ex
+from threading import Thread
+import time
+def do_something(seconds):
+    print(f'sleeping {seconds} seconds')
+    time.sleep(seconds)
+    print(f'sleeping done in {seconds}')
+threads = []
+for _ in range(10):    
+    t1 = Thread(target=do_something,args=[1.5])
+    t1.start()
+    threads.append(t1)
+for thr in threads:
+    thr.join()
+    
+exm:3    
+import concurrent.futures
+
+def do_something(seconds):
+    print(f'sleeping {seconds} seconds')
+    time.sleep(seconds)
+    return (f'sleeping done in {seconds}')
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    f1 = executor.submit(do_something,1.5)
+    print(f1.result())    
+    
+    
+    
+------------------------------------
+            strings
+            
+            
+s = 'hello world'
+s1 = 'python is good python is easy python is fast'
+# print(s.title())#converting 1st to upp of ev word
+# print(s.upper())
+# print(s.lower())
+# print(s.capitalize())
+# print(s.center(10,'*'))
+# print(s1.count('o'))
+# print(s1.count('python'))
+# print((s.index('o')))
+# print(s.partition(' e '))
+#s=s.strip()
+#s.split()
+#s.replace('hello','welcome')
